@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { PUBLIC_ANILIST_APP_ID, PUBLIC_ANILIST_APP_REDIRECT } from "$env/static/public";
+  import { PUBLIC_ANILIST_CLIENT_ID, PUBLIC_ANILIST_CLIENT_REDIRECT } from "$env/static/public";
   import type { LayoutData } from "./$types";
 
-  const authUrl = `https://anilist.co/api/v2/oauth/authorize?client_id=${PUBLIC_ANILIST_APP_ID}&redirect_uri=${PUBLIC_ANILIST_APP_REDIRECT}&response_type=code`;
+  const authUrl = `https://anilist.co/api/v2/oauth/authorize?client_id=${PUBLIC_ANILIST_CLIENT_ID}&redirect_uri=${PUBLIC_ANILIST_CLIENT_REDIRECT}&response_type=code`;
 
   export let data: LayoutData;
 </script>
@@ -17,13 +17,13 @@
         Login
       </button>
     </a>
-    <p class="w-1/3 mt-2">This button will either direct you to a login page on AniList or seamlessly authenticate. It depends on if AniList can determine the user or not.</p>
+    <p class="w-1/3 mt-2 text-sm">This button will either direct you to a login page on AniList or seamlessly authenticate. It depends on if AniList can determine the user or not.</p>
   {:else}
     {@const { user } = data}
     <div class="flex w-64 space-x-4">
       <img class="flex-none aspect-square rounded-md w-24" src={user.avatar.large} alt="User avatar">
       <div class="flex-1 flex flex-col justify-center items-start">
-        <p class="text-lg font-semibold">{user.name}</p>
+        <a class="text-lg font-semibold hover:text-blue-500 transition-colors" href={user.siteUrl} target="_blank" rel="noreferrer">{user.name}</a>
         <p class="text-sm">ID <span class="font-medium">{user.id}</span></p>
       </div>
     </div>

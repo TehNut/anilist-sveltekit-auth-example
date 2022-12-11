@@ -1,6 +1,6 @@
 import { error, redirect } from "@sveltejs/kit";
-import { PUBLIC_ANILIST_APP_ID, PUBLIC_ANILIST_APP_REDIRECT } from "$env/static/public";
-import { ANILIST_APP_SECRET } from "$env/static/private";
+import { PUBLIC_ANILIST_CLIENT_ID, PUBLIC_ANILIST_CLIENT_REDIRECT } from "$env/static/public";
+import { ANILIST_CLIENT_SECRET } from "$env/static/private";
 import type { RequestHandler } from "./$types";
 
 export const GET: RequestHandler = async ({ url, cookies }) => {
@@ -16,9 +16,9 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
     },
     body: JSON.stringify({
       grant_type: "authorization_code",
-      client_id: `${PUBLIC_ANILIST_APP_ID}`,
-      client_secret: ANILIST_APP_SECRET,
-      redirect_uri: `${PUBLIC_ANILIST_APP_REDIRECT}`,
+      client_id: PUBLIC_ANILIST_CLIENT_ID,
+      client_secret: ANILIST_CLIENT_SECRET,
+      redirect_uri: PUBLIC_ANILIST_CLIENT_REDIRECT,
       code
     })
   }).then(res => res.json()) as { access_token: string };
